@@ -10,5 +10,10 @@ describe('Dabber', function() {
       expect(Dabber.dab('<img src="/some/image/url.png" width="5" height="5">'))
         .to.equal(`<img src="${Dabber.DAB_GIF}" width="5" height="5">`);
     });
+
+    it('handles single quotes', function() {
+      expect(Dabber.dab('<img src=\'/some/image/url.png\' width="5" height="5">'))
+        .to.equal(`<img src="${Dabber.DAB_GIF}" width="5" height="5">`);
+    });
   });
 });
