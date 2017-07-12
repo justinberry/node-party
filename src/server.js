@@ -1,11 +1,10 @@
-var PageGetter = require('./page-getter.js');
-
-const DAB_GIF = "https://media3.giphy.com/media/lae7QSMFxEkkE/giphy.gif";
+var Page = require('./page.js');
+var Dabber = require('./dabber.js');
 
 var http = require('http');
 http.createServer(async function(request, response) {
   response.writeHead(200, {'Content-Type': 'text/html'});
-  var page = await PageGetter.getPage('reddit.com');
-  response.write(page.replace(/<img(.*?)src="[^"]*"([^>]*)>/g, `<img $1 src="${DAB_GIF}" $2>`));
+  var pageBody = await Page.get('reddit.com');
+  response.write(Dabber.dab(pageBody));
   response.end();
 }).listen(8888);
